@@ -97,4 +97,5 @@ public abstract class Employee {
     public void setTimeInCompany(int timeInCompany) {
         this.timeInCompany = timeInCompany;
     }
+
 }

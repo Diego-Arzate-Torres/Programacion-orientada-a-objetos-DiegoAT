@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 public class CLI {
@@ -41,36 +43,45 @@ public class CLI {
         }
     }
 
-    static void testReadFiles() {
+    public static void testReadFiles() {
         ArrayList<Employee> readList = new ArrayList<>();
         String fileName = "Employees.txt";
         Path file = Paths.get(fileName);
 
         try {
 
-            for(String line : Files.readAllLines(file)){
+            for (String line : Files.readAllLines(file)) {
                 List<String> lines = readList
                         .stream()
                         .map(Employee::toString)
                         .collect(Collectors.toList());
-                lines.add(line);
-                System.out.println(lines);
+                System.out.println(line);
+                List<Employee> employeesOver20 = new ArrayList<>();
+                for (int i =0; i < line.length(); i++){
+
+                    employeesOver20.add(new JrEngineer());
+                    printOver20Emp(employeesOver20);
+                }
+            }
                 System.out.println("------------------");
 
-            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
-        static void printOver20Emp (List < String > lines, Employee employee){
-            for (int i = 0; i < lines.size(); i++) {
-                if (employee.getAge() > 20) {
-                    System.out.println(lines);
+    }
+        static List<Employee> printOver20Emp (List < Employee > employees) {
+        List<Employee> employeesOver20 = Collections.emptyList();
+            for (int i = 0; i < employees.size(); i++) {
+                if (employees.get(i).getAge() > 20) {
+                    System.out.println(employees.get(i));
+                    employeesOver20.add(employees.get(i));
                 }
 
-            }
+            }return employeesOver20;
+
         }
 
 
