@@ -8,8 +8,8 @@ import java.util.Comparator;
 
 public class ClasePrueba {
 
-    public static ArrayList<Employee> readEmployees(String nombreArchivo) throws IOException {
-        ArrayList<Employee> empleados = new ArrayList<>();
+    public static ArrayList<Employee> readEmployee(String nombreArchivo) throws IOException {
+        ArrayList<Employee> employees = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;
@@ -18,52 +18,52 @@ public class ClasePrueba {
                 String name = datos[0];
                 int age = Integer.parseInt(datos[1]);
                 String RFC = datos[2];
-                Employee empleado = new Employee(){
+                Employee employee = new Employee() {
+                    /**
+                     *
+                     */
                     @Override
                     public void work() {
 
                     }
                 };
-                empleados.add(empleado);
+                employees.add(employee);
             }
         }
-        return empleados;
+        return employees;
+
     }
 
-    public static void main(String[] args) {
-        try {
-            ArrayList<Employee> empleados = Employee.readEmployees("empleados.txt");
+        public static void main (String[]args){
+            ArrayList<Employee> employees = Employee.readEmployee("src/reto12/ui/Employees.txt");
 
             // Determinar cuántos empleados tienen entre 20 y 25 años de edad
-            long cantidadEmpleados = empleados.stream()
+            long numOfEmployees = employees.stream()
                     .filter(e -> e.getAge() >= 20 && e.getAge() <= 25)
                     .count();
-            System.out.println("Cantidad de empleados con edad entre 20 y 25 años: " + cantidadEmpleados);
+            System.out.println("Cantidad de empleados con edad entre 20 y 25 años: " + numOfEmployees);
 
             // Imprimir los primeros 10 empleados de la lista ordenada alfabéticamente
-            empleados.stream()
+            employees.stream()
                     .sorted(Comparator.comparing(Employee::getName))
                     .limit(10)
                     .forEach(e -> System.out.println(e.getName()));
 
             // Encontrar el promedio de edad de todos los empleados
-            double promedioEdad = empleados.stream()
+            double promedioEdad = employees.stream()
                     .mapToInt(Employee::getAge)
                     .average()
                     .orElse(Double.NaN);
             System.out.println("Promedio de edad de todos los empleados: " + promedioEdad);
 
             // Encontrar el último empleado de la lista si esta tiene como primer criterio de ordenamiento la edad y segundo criterio el nombre (alfabéticamente)
-            Employee ultimoEmpleado = empleados.stream()
+            Employee ultimoEmpleado = employees.stream()
                     .sorted(Comparator.comparingInt(Employee::getAge).reversed().thenComparing(Employee::getName))
                     .findFirst()
                     .orElse(null);
             System.out.println("Último empleado de la lista: " + ultimoEmpleado.getName());
 
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
         }
-    }
 
-}
+    }
 

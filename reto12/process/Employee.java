@@ -1,5 +1,6 @@
 package reto12.process;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public abstract class Employee {
@@ -29,6 +30,12 @@ public abstract class Employee {
         this.phoneNum = phoneNum;
         this.socialSecurityNum = socialSecurityNum;
     }
+
+    public static ArrayList<Employee> readEmployee(String s) {
+
+        return readEmployee(s);
+    }
+
 
     /**Metodos
      * Este metodo se encarga de "trabajar" en todas aquellas clases en la que es llamado
