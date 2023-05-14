@@ -6,18 +6,38 @@ import edu.diego.arzate.torres.retoFinal.process.Ogro;
 
 import java.util.Scanner;
 
-
+/**
+ La clase Juego representa el juego principal del programa.
+ Contiene un jugador, un mago y un ogro, y ofrece diferentes opciones
+ De juego para el jugador.
+ */
 public class Juego {
+    /**
+     El jugador del juego.
+     */
     private static Jugador jugador;
+    /**
+     El mago del juego.
+     */
     private static Mago mago;
+    /**
+     El ogro del juego.
+     */
     private static Ogro ogro;
+    /**
 
+     Constructor de la clase Juego.
+     @param jugador El jugador del juego.
+     */
     public Juego(Jugador jugador) {
         Juego.jugador = new Jugador();
         mago = new Mago();
         ogro = new Ogro();
     }
 
+    /**
+     Método que inicia el juego y muestra las opciones disponibles al usuario.
+     */
     public static void jugar() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bienvenido al juego");
@@ -72,7 +92,13 @@ public class Juego {
                 default:
                     System.out.println("Opción inválida, intenta de nuevo");
             }
-
+/**
+ Este método es parte del juego y se ejecuta cada vez que el jugador decide atacar al ogro.
+ Primero verifica si el juego ha terminado, y luego hace que el ogro ataque al jugador. Si el jugador es golpeado,
+ se muestra un mensaje en la consola. Luego, el método llama al método "restarPoderMago" del jugador para atacar al mago.
+ Si el mago es derrotado, se muestra un mensaje en la consola y se establece la variable "juegoTerminado" en true.
+ Si el nivel del jugador es 0, se muestra un mensaje en la consola y se establece la variable "juegoTerminado" en true.
+ */
             if (!juegoTerminado) {
                 boolean jugadorGolpeado = ogro.atacarJugador(jugador);
                 if (jugadorGolpeado) {
