@@ -1,31 +1,92 @@
 package edu.diego.arzate.torres.retoFinal.ui;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
+import edu.diego.arzate.torres.retoFinal.process.Jugador;
+import edu.diego.arzate.torres.retoFinal.process.Mago;
+import edu.diego.arzate.torres.retoFinal.process.Ogro;
 
-public class Juego extends JFrame {
-
-public Juego() {
-  JLabel label = new JLabel();
-  Border border = BorderFactory.createLineBorder(new Color(192,128,255),3);
-  label.setText("********************  "+"Bienvenido a la Villa Hechizada"+"  ********************");
-  label.setForeground(new Color(230, 230, 230));
-  label.setFont(new Font("MV Boli",Font.BOLD,27));
-  label.setHorizontalAlignment(JLabel.CENTER);
-  label.setVerticalAlignment(JLabel.TOP);
-  label.setBorder(border);
-  this.add(label);
+import java.util.Scanner;
 
 
+public class Juego {
+    private static Jugador jugador;
+    private static Mago mago;
+    private static Ogro ogro;
 
-  this.setTitle("La villa Hechizada");
-  this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  this.setResizable(false);
-  this.setSize(940, 840);
-  this.setVisible(true);
-  this.getContentPane().setBackground(new Color(39, 39, 39));
-  ImageIcon image = new ImageIcon("edu/diego/arzate/torres/retoFinal/ui/mi-loco-dale-pa-fuera.png");
-  this.setIconImage(image.getImage());
-}
+    public Juego(Jugador jugador) {
+        Juego.jugador = new Jugador();
+        mago = new Mago();
+        ogro = new Ogro();
+    }
+
+    public static void jugar() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Bienvenido al juego");
+        boolean juegoTerminado = false;
+
+        while (!juegoTerminado) {
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Construir casa");
+            System.out.println("2. Rescatar hada");
+            System.out.println("3. Recolectar material");
+            System.out.println("4. Atacar al ogro");
+            System.out.println("5. Ver estadísticas");
+            System.out.println("6. Salir");
+
+            int opcion = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    jugador.construirCasa();
+                    break;
+                case 2:
+                    jugador.rescatarHada();
+                    break;
+                case 3:
+                    jugador.recolectarMaterial();
+                    break;
+                case 4:
+                    if (ogro.estaDerrotado()) {
+                        System.out.println("¡Ya has derrotado al ogro! No hay necesidad de atacarlo de nuevo.");
+                    } else {
+                        boolean ogroDerrotado = jugador.restarPoder(ogro.getPoder() - 10);
+                        if (ogroDerrotado) {
+                            System.out.println("¡Felicitaciones, has derrotado al ogro!");
+                        } else if (jugador.getNivel() == 0) {
+                            System.out.println("¡Lo siento, has perdido! El poder del ogro ha aumentado demasiado.");
+                        }
+                    }
+                    break;
+                case 5:
+                    System.out.println("----Estadísticas----");
+                    System.out.println("Nivel del jugador: " + jugador.getNivel());
+                    System.out.println("Hadas rescatadas: " + jugador.getHadasRescatadas());
+                    System.out.println("Casas construidas: " + jugador.getCasasConstruidas());
+                    System.out.println("Poder del mago: " + mago.getPoder());
+                    System.out.println("Poder del ogro: " + ogro.getPoder());
+                    break;
+                case 6:
+                    System.out.println("Gracias por jugar");
+                    juegoTerminado = true;
+                    break;
+                default:
+                    System.out.println("Opción inválida, intenta de nuevo");
+            }
+
+            if (!juegoTerminado) {
+                boolean jugadorGolpeado = ogro.atacarJugador(jugador);
+                if (jugadorGolpeado) {
+                    System.out.println("¡El ogro te ha golpeado, cuidado!");
+                }
+                boolean magoDerrotado = jugador.restarPoderMago(mago);
+                if (magoDerrotado) {
+                    System.out.println("¡Felicitaciones, has derrotado al mago!");
+                    juegoTerminado = true;
+                } else if (jugador.getNivel() == 0) {
+                    System.out.println("¡Lo siento, has perdido! El poder del mago ha aumentado demasiado");
+                    juegoTerminado = true;
+                }
+            }
+        }
+    }
 }
