@@ -1,0 +1,10 @@
+"William", "Afton", "aksjsakjsdkjhdsak", 40, 331234560, 85627381, "Java, C#, Python", 5
+"Francisco", "Usurpado", "JHDSAKHDSAKJ", 21, 331452638, 837201929, "HTML5, CSS, PHP, C++", 4
+"Horacio", "Solomon", "jhdakhdksja", 29, 334566271, 903283481, "Java, C#, CSS, PHP, C++, Ruby, Fortran", 6
+"Sofia", "Garcia", "aksjsakjsdkjhdsak", 40, 331234560, 85627381, "Java, C#, Python", 5
+"Mateo", "Rodriguez", "JHDSAKHDSAKJ", 21, 331452638, 837201929, "HTML5, CSS, PHP, C++", 4
+"Valentina", "Martinez", "jhdakhdksja", 29, 334566271, 903283481, "Java, C#, CSS, PHP, C++, Ruby, Fortran", 6
+"Santiago", "Lopez", "aksjsakjsdkjhdsak", 40, 331234560, 85627381, "Java, C#, Python", 5
+"Isabella", "Perez", "JHDSAKHDSAKJ", 21, 331452638, 837201929, "HTML5, CSS, PHP, C++", 4
+"Alejandro", "Gomez", "jhdakhdksja", 29, 334566271, 903283481, "Java, C#, CSS, PHP, C++, Ruby, Fortran", 6
+"Samuel", "Sanchez", "jhdakhdksja", 29, 334566271, 903283481, "Java, C#, CSS, PHP, C++, Ruby, Fortran", 6
